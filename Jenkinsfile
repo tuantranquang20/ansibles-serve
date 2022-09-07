@@ -10,7 +10,7 @@ node {
     // }
     stage('Build image') {
 
-        app = docker.build("tuanops/jenkins-docke")
+        app = docker.build("tuanops/jenkins-docker")
     }
     
     stage('Test image') {
@@ -23,6 +23,11 @@ node {
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
+        }
+    }
+    stage('Cleaning up') {
+        app.inside {
+            sh "docker rmi $registry:$BUILD_NUMBER"
         }
     }
 
