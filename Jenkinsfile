@@ -27,7 +27,7 @@ node {
     }
     stage('Cleaning up') {
         app.inside {
-            sh "docker rmi $registry:$BUILD_NUMBER"
+            sh "docker rm image $registry:$BUILD_NUMBER -f"
         }
     }
 
