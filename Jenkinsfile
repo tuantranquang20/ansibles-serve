@@ -1,4 +1,6 @@
 pipeline {
+    agent none
+    
     environment {
         registry = "tuanops/jenkins-docker"
         registryCredential = 'dockerhub'
